@@ -5,6 +5,13 @@ using namespace std;
 int main(){
     char sim[7];
    tablero t(1, sim);
+   jugador j1(1,sim);
+   jugador j2(1,sim);
+
+   /*
+   PRUEBA CON TABLERO
+   
+   t.gentamaño();
    t.construirTablero();
    t.mostrar();
    t.colocarbarco();
@@ -13,9 +20,11 @@ int main(){
    t.tirarmisil();
    t.tirarmisil();
    t.tirarmisil();
-
-   /*1_ j vsj o 2_ j vs cpu
-   t.gentamaño();
-   j.generar tablero*/
+*/
+/*PRUEBA CON JUGADOR*/
+   t.gentamano();
+j1.jconstruirTablero();
+j2.jconstruirTablero();
+  
     return 0;
 }

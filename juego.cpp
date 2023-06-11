@@ -3,21 +3,12 @@
 using namespace std;
 #pragma once
 
+
 tablero::tablero(int longitud_, char simbolo_[7]) : barcos(longitud_, simbolo_){};
 
 // construirTablero pone los puntos en los lugares del tablero
-/*void tablero::gentamaño(){  cout << "Poner el tamaño del tablero:" << endl;
-    cout << "fila: ";
-    cin >> fil;
-    cout << "columna: ";
-    cin >> col;
-    cout << endl;
-    f = &fil;
-    c = &col;}*/
-
-void tablero::construirTablero()
-{
-    cout << "Poner el tamaño del tablero:" << endl;
+void tablero::gentamano()
+{  cout << "Poner el tamaño del tablero:" << endl;
     cout << "fila: ";
     cin >> fil;
     cout << "columna: ";
@@ -25,6 +16,11 @@ void tablero::construirTablero()
     cout << endl;
     f = &fil;
     c = &col;
+    }
+
+void tablero::construirTablero()
+{
+
     for (int i = 1; i < (*f + 1); i++)
     {
         for (int j = 1; j < (*c + 1); j++)
@@ -32,6 +28,7 @@ void tablero::construirTablero()
             cas[i][j] = '.';
         }
     }
+    cout << "tablero de " << *f << " x " << *c << " creado";
     /* for (int i = 1; i < (fil+1); i++)
      {
          for (int j = 1; j < (col+1); j++)

@@ -45,8 +45,42 @@ private:
   
 public:
   tablero(int longitud_, char simbolo_[7]);
+  
+  void gentamano();
+
   void construirTablero();
   void colocarbarco();
   void mostrar();
   void tirarmisil();
 };
+class jugador{
+  private:
+  tablero tab;
+  public:
+  jugador(int longitud_, char simbolo_[7]):tab(longitud_,simbolo_){
+    
+  };
+  tablero jgetTablero(){
+    return tab;
+  }
+  void jconstruirTablero(){
+    tab.construirTablero();
+  }
+  void jcolocarbarco(){
+    tab.colocarbarco();
+  }
+  void jmostrar(){
+    tab.mostrar();
+  }
+  void jtirarmisil(tablero tab_){
+    tab_.tirarmisil();
+
+  }
+};
+
+/*  
+j1.jtirarmisil(j2.jgetablero())
+
+j1.jtablero();
+j2.jtablero();
+*/
