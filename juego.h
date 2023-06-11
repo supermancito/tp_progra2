@@ -1,41 +1,52 @@
 #include <iostream>
+#pragma once
 using namespace std;
-
- class tablero{
+class barcos
+{
     private:
-    int cas[9][9];
+      int longitud;
+      char simbolo[7] = {'L', 'S','s', 'B', 'b', 'V','P'};
+      char simboloBarco;
+
     public:
-    void asignar_casilleros();
-   // void tirar_misil();
-    //void victoria();
+      barcos(int longitud_, char simbolo_[7])
+      {
+        longitud = longitud_;
+        simbolo[7] = simbolo_[7];
+      };
+      int setlongitud()
+      {
+        char sim = getsimbolo();
+        if (sim == 'L') longitud = 1;
+        if (sim =='S') longitud = 2;
+        if (sim =='s') longitud = 2;
+        if (sim == 'B') longitud = 3;
+        if (sim == 'b') longitud = 3;
+        if (sim == 'v') longitud = 3;
+        if (sim == 'P') longitud = 4;
+      };
+      int getlongitud() { return longitud; };
+      void setSimbolo(int i ){
+
+        simboloBarco = simbolo[i];
+
+      }
+      char getsimbolo( )
+      {
+        return simboloBarco;
+      };
+};
+class tablero : public barcos
+{
+private:
+    int *f, *c;
+    int fil = 0, col = 0;
+    char cas[1000][1000];
   
-    
-
- };
- class jugador{
-    private:
-    string nombre;
-    public: 
-    string get_nombre(){
-      return nombre;
-    }
-    //jugador();
- };
- class compu{
-
- };
- class naves{
-  private:
-   int nave1[1] = {1};
-   int nave2[2] = {1,1};
-   int nave2_1[2] = {1,1};
-   int nave3[3]= {1,1,1};
-   int nave3_1[3]= {1,1,1};
-   int nave3_2[3]= {1,1,1};
-   int nave4[4]= {1,1,1,1};
-   public:
-   
-   
-
- };
- 
+public:
+  tablero(int longitud_, char simbolo_[7]);
+  void construirTablero();
+  void colocarbarco();
+  void mostrar();
+  void tirarmisil();
+};
