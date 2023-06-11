@@ -1,5 +1,5 @@
 #include <iostream>
-#pragma once
+
 using namespace std;
 class barcos
 {
@@ -13,7 +13,9 @@ class barcos
       {
         longitud = longitud_;
         simbolo[7] = simbolo_[7];
-      };
+      }
+
+    barcos() {};
       int setlongitud()
       {
         char sim = getsimbolo();
@@ -41,44 +43,59 @@ class tablero : public barcos
 private:
     int *f, *c;
     int fil = 0, col = 0;
-    char cas[1000][1000];
+    char cas[100][100];
   
 public:
-  tablero(int longitud_, char simbolo_[7]);
-  
-  void gentamano();
+    int *getF() ;
 
-  void construirTablero();
-  void colocarbarco();
-  void mostrar();
-  void tirarmisil();
-};
-class jugador{
-  private:
-  tablero tab;
-  public:
-  jugador(int longitud_, char simbolo_[7]):tab(longitud_,simbolo_){
-    
-  };
-  tablero jgetTablero(){
-    return tab;
-  }
-  void jconstruirTablero(){
-    tab.construirTablero();
-  }
-  void jcolocarbarco(){
-    tab.colocarbarco();
-  }
-  void jmostrar(){
-    tab.mostrar();
-  }
-  void jtirarmisil(tablero tab_){
-    tab_.tirarmisil();
+    int *getC() ;
 
-  }
+    tablero();
+    tablero(int longitud_, char simbolo_[7]);
+
+
+    void gentamano();
+
+    void construirTablero1();
+    void construirTablero2(int* fil, int* col);
+      void colocarbarco();
+      void mostrar(); // pantallas con barcos
+      void tirarmisil();
+
+    void mostrarPantalla(); // pantalla sin barcos
+
+    void colocarbarcoauto();
+
+    void tirarmisilauto();
+    bool enPie();
 };
 
-/*  
+class jugador : public tablero {
+private:
+public:
+    jugador(int longitud, char *simbolo);
+};
+    /*
+    tablero jgetTablero(){
+    return jt;
+}
+
+void jconstruirjtlero(){
+  jt.construirTablero1();
+}
+void jcolocarbarco(){
+  jt.colocarbarco();
+}
+void jmostrar(){
+  jt.mostrar();
+}
+void jtirarmisil(tablero tab_){
+  jt_.tirarmisil();
+
+}
+};
+*/
+/*
 j1.jtirarmisil(j2.jgetablero())
 
 j1.jtablero();
