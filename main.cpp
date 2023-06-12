@@ -2,12 +2,24 @@
 
 #include "juego.cpp"
 using namespace std;
+void lopiano();
 int main()
 {
 
   char sim[7];
   jugador j1(1, sim), j2(1, sim);
   char num;
+
+  /////////////////////////////////////////// pruebas
+  j1.gentamano();
+  j1.construirTablero1();
+  j1.colocarbarco();
+
+ ///////////////////////////////////////////////
+
+
+  /* MENU INTERACTIVO
+  
   cout << "Bienvenido a la batalla naval" << endl;
   cout << "Poner el modo de juego que desee" << endl;
 
@@ -84,10 +96,17 @@ int main()
     cout<<"--Gracias por jugar nuestro juego-- "<<endl;
     cout<<"'Ruben Blanco y Fabrizzio Castro: Futuros ing. Electronicos'";
   }
-  
+  */
 
 
 return 0;
+}
+void lopiano(){
+  cout <<"coloca un valor mayor igual a 3: ";
+  int i;
+  cin>>i;
+  if (i <3) {lopiano();}
+  else {cout << "Colcaste bien i es igual a " << i<< endl;}
 }
 
 // INICIO TABLEROS JUGADORES

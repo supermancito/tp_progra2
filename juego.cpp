@@ -1,30 +1,78 @@
 #include <iostream>
 #include "juego.h"
+#include <stdexcept>
+#include <limits>
 using namespace std;
 
 tablero::tablero(int longitud_, char simbolo_[7]) : barcos(longitud_, simbolo_){};
 
 // construirTablero1 pone los puntos en los lugares del tablero
 void tablero::gentamano()
-{
-    do{
-    cout << "Poner el tamaño del tablero:" << endl;
-    cout << "fila: ";
-    cin >> fil;
-    cout << "columna: ";
-    cin >> col;
-    cout << endl;
-    f = &fil;
-    c = &col;
-    if (*f < 8 || *c <8)
-    {
-        cout<<"El tamaño tiene que ser mayor a 8"<<endl;
-    }
-    
-    }while(*f < 9 || *c < 9 );
-    //Falta poner que fila y columna sea mas  de 9 y ningun caracter
-}
+{ /*
 
+     do {
+         cout << "Poner el tamaño del tablero:" << endl;
+         cout << "fila: ";
+         cin >> fil;
+         try {
+             if (cin.fail()) {
+                 throw runtime_error("Pusiste una letra en vez de un numero");
+
+
+             }
+         } catch (const exception& e) {
+             cout << e.what() << '\n';
+             cin.clear(); // Clear error state
+             continue; // Restart the loop
+
+         }
+
+         cout << "columna: ";
+         cin >> col;
+         cout << endl;
+         f = &fil;
+         c = &col;
+
+         if (*f < 9 || *c < 9) {
+             cout << "El tamaño tiene que ser un numero mayor a 8." << endl;
+         }
+     } while (*f < 9 || *c < 9 || cin.fail());*/
+    // Additional checks can be added to ensure that both fila and columna are integers greater than 8.
+    bool exceptionOccurred = false;
+
+    do
+    {
+        cout << "Poner el tamaño del tablero:" << endl;
+        cout << "fila: ";
+        cin >> fil;
+        cout << "columna: ";
+        cin >> col;
+        cout << endl;
+        f = &fil;
+        c = &col;
+        try
+        {
+            if (cin.fail())
+            {
+                
+                cin.clear(); // Clear error state
+                cin.ignore();
+                throw runtime_error("Pusiste una letra en vez de un numero");
+                // Restart the loop
+                
+
+            }
+        }
+            catch (exception e)
+            {
+               //cout << e.what() << '\n';
+                cin.clear(); // Clear error state
+                cout <<"Pusiste una letra en vez de un numero" << "\n";
+                cin.ignore();
+                continue;
+            }
+    }while ( *f < 9 || *c < 9);
+}
 void tablero::construirTablero1()
 {
 
@@ -69,11 +117,36 @@ void tablero::mostrar()
 {
     cout << endl;
     cout << endl;
-    for (int i = 1; i < (*f + 1); i++)
-    {cout <<i<<" ";
+    for (int i = 0; i < (*f + 1); i++)
+    {
+        if (i == 0)
+        {
+            cout << "   ";
+        }
+        else
+        {
+            if (i < 10)
+            {
+                cout << i << "  ";
+            }
+
+            else
+                cout << i << " ";
+        }
+
         for (int j = 1; j < (*c + 1); j++)
         {
-            cout << cas[i][j] << "  ";
+            if (i == 0 && j < 9)
+            {
+                cout << j << "";
+            }
+            if (i == 0 && 8 < j)
+            {
+                cout << j << " ";
+            }
+
+            else
+                cout << cas[i][j] << "  ";
         }
         cout << endl;
     }
@@ -84,14 +157,47 @@ void tablero::mostrarPantalla()
 {
     cout << endl;
     cout << endl;
-    for (int i = 1; i < (*f + 1); i++)
+    for (int i = 0; i < (*f + 1); i++)
     {
+        if (i == 0)
+        {
+            cout << "   ";
+        }
+        else
+        {
+            if (i < 10)
+            {
+                cout << i << "  ";
+            }
+
+            else
+                cout << i << " ";
+        }
+
         for (int j = 1; j < (*c + 1); j++)
         {
-            if (cas[i][j] == 'L' || cas[i][j] == 'S' || cas[i][j] == 's' || cas[i][j] == 'B' || cas[i][j] == 'b' || cas[i][j] == 'V' || cas[i][j] == 'P')
-                cout << '.' << "  ";
+            if (i == 0)
+            {
+                if (j < 9)
+                {
+                    cout << j << "  ";
+                }
+                if (8 < j)
+                {
+                    cout << j << " ";
+                }
+            }
             else
-                cout << cas[i][j] << "  ";
+            {
+                if (cas[i][j] == 'L' || cas[i][j] == 'S' || cas[i][j] == 's' || cas[i][j] == 'B' || cas[i][j] == 'b' || cas[i][j] == 'V' || cas[i][j] == 'P')
+                {
+                    cout << '.' << "  ";
+                }
+                else
+                {
+                    cout << cas[i][j] << "  ";
+                }
+            }
         }
         cout << endl;
     }
@@ -117,6 +223,29 @@ void tablero::colocarbarco()
             cin >> fila;
             cout << "Indicar ahora, columna entre " << *c << ":";
             cin >> columna;
+
+            try
+        {
+            if (cin.fail())
+            {
+                
+                cin.clear(); // Clear error state
+                cin.ignore();
+                throw runtime_error("Pusiste una letra en vez de un numero");
+                // Restart the loop
+                
+
+            }
+        }
+            catch (exception e)
+            {
+               //cout << e.what() << '\n';
+                cin.clear(); // Clear error state
+                cout <<"Pusiste una letra en vez de un numero" << "\n";
+                cin.ignore();
+                continue;
+            }
+
             if (fila < 1 || *f < fila)
             {
                 cout << "Colocar valores validos para fila" << endl;
@@ -314,7 +443,7 @@ void tablero::colocarbarcoauto()
         mostrar();
     }
 }
-//pone las cordenadas del misil y dice si acertaste o no 
+// pone las cordenadas del misil y dice si acertaste o no
 void tablero::tirarmisil()
 {
     int fila, columna;
@@ -328,9 +457,30 @@ void tablero::tirarmisil()
         cin >> fila;
         cout << "  columna: ";
         cin >> columna;
+         try
+        {
+            if (cin.fail())
+            {
+                
+                cin.clear(); // Clear error state
+                cin.ignore();
+                throw runtime_error("Pusiste una letra en vez de un numero");
+                // Restart the loop
+                
+
+            }
+        }
+            catch (exception e)
+            {
+               //cout << e.what() << '\n';
+                cin.clear(); // Clear error state
+                cout <<"DEBE COLOCAR SOLO NUMEROS DENTRO DE EL TABLERO" << "\n";
+                cin.ignore();
+                continue;
+            }
         k = 0;
-        //falta poner que si pone 0, 0 no tire error
-    } while (cas[fila][columna] == 'x' || cas[fila][columna] == 48 || fila > *f || columna > *c);
+        // falta poner que si pone 0, 0 no tire error SOLUCIONADO
+    } while (cas[fila][columna] == 'x' || cas[fila][columna] == 48 || fila > *f || columna > *c || fila == 0 || columna == 0);
 
     bool barcoHundido = true;
     // Estto dice si le pegaste o no ||  || cas[fila][columna] == 's' || cas[fila][columna] == 'B' || cas[fila][columna] == 'V' || cas[fila][columna] == 'f'
@@ -703,7 +853,7 @@ int *tablero::getC()
 {
     return c;
 }
-//Esto busca algun barco sino encuentra se termino el juego
+// Esto busca algun barco sino encuentra se termino el juego
 bool tablero::enPie()
 {
 
